@@ -12,6 +12,7 @@ function Signup() {
 
 
     const navigate = useNavigate();
+    const inputStyle = { height: '2rem', width: '20rem', margin: '2px' }
 
 
     const handleSubmit = (e) => {
@@ -32,29 +33,30 @@ function Signup() {
             <br />
             <h2>Sign up</h2>
             <form onSubmit={handleSubmit}>
-                <input type='text' value={username} onChange={e => { setStatus(false); setUsername(e.target.value) }}
+                <input type='text' style={inputStyle} value={username} onChange={e => { setStatus(false); setUsername(e.target.value) }}
                     required placeholder='Username' /> <br />
 
-                <input type='email' value={email} onChange={e => { setStatus(false); setEmail(e.target.value) }}
+                <input type='email' style={inputStyle} value={email} onChange={e => { setStatus(false); setEmail(e.target.value) }}
                     required placeholder='Email' /> <br />
 
-                <input type='password' value={password} onChange={e => { setStatus(false); setpassword(e.target.value) }}
+                <input type='password' style={inputStyle} value={password} onChange={e => { setStatus(false); setpassword(e.target.value) }}
                     required placeholder='Password' /><br />
-                <select required defaultValue={'USER'}
+                <select required defaultValue={'USER'} style={inputStyle}
                     onChange={(e) => { setStatus(false); setRoles(e.target.value) }}>
                     <option value={'ADMIN'}>ADMIN</option>
                     <option value={'USER'}>USER</option>
                     <option value={'REVIEWER'}>REVIEWER</option>
                 </select>
 
-                <div >
-                    <button style={{ background: 'cadetblue', color: 'whitesmoke' }}>Sign up</button>
-                    <button style={{ background: 'tomato', marginLeft: '3.5rem', color: 'whitesmoke' }} onClick={(e) => {
-                        e.preventDefault();
-                        setEmail('');
-                        setpassword('');
-                        setUsername('');
-                    }} disabled={username.trim().length === 0 && password.trim().length === 0 && email.trim().length === 0}>Reset</button>
+                <div>
+                    <button style={{ background: 'cadetblue', color: 'whitesmoke', height: '2rem', border: 'cadetblue' }}>Sign up</button>
+                    <button style={{ background: 'tomato', marginLeft: '3.5rem', color: 'whitesmoke', height: '2rem', border: 'tomato' }}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            setEmail('');
+                            setpassword('');
+                            setUsername('');
+                        }} disabled={username.trim().length === 0 && password.trim().length === 0 && email.trim().length === 0}>Reset</button>
                 </div>
             </form>
             {
