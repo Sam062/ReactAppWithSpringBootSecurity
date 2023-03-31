@@ -32,7 +32,7 @@ function Signin() {
   }
 
   return (
-    <div className='app'
+    <div className='App'
     // style={{ marginTop: '15%', marginLeft: '35%' }}
     >
       <br />

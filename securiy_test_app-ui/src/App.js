@@ -25,7 +25,7 @@ function App() {
   const user = getUser();
 
   return (
-    <div className='App'>
+    <div className=''>
       <Store.Provider value={{ jwtResponse, setJwtResponse }}>
         <BrowserRouter>
           {

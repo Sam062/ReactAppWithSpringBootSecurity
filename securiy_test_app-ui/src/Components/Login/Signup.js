@@ -26,7 +26,7 @@ function Signup() {
     }
 
     return (
-        <div className='app'
+        <div className='App'
         // style={{ marginTop: '15%', marginLeft: '35%' }}
         >
             <br />
@@ -40,7 +40,8 @@ function Signup() {
 
                 <input type='password' value={password} onChange={e => { setStatus(false); setpassword(e.target.value) }}
                     required placeholder='Password' /><br />
-                <select required onChange={(e) => { setStatus(false); setRoles(e.target.value) }}>
+                <select required defaultValue={'USER'}
+                    onChange={(e) => { setStatus(false); setRoles(e.target.value) }}>
                     <option value={'ADMIN'}>ADMIN</option>
                     <option value={'USER'}>USER</option>
                     <option value={'REVIEWER'}>REVIEWER</option>

@@ -6,7 +6,7 @@ function Home() {
 
     return (
         <div style={{textAlign: 'left'}}>
-            <h1 style={{background: 'whitesmoke', width: '100%', padding: '1rem'}}>User Dashboard</h1>
+            <h1 style={{background: 'whitesmoke', width: '97%', padding: '1rem'}}>User Dashboard</h1>
             {
                 user && user.token && <div style={{padding: '1rem'}}>
                     <p><strong>Name: </strong>{user.name}</p>

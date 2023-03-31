@@ -31,40 +31,42 @@ const columns = [
 
 ]
 
-function Header({ jwtResponse, setJwtResponse }) {
+function Header() {
     const user = getUser();
     const navigate = useNavigate();
 
 
-    console.log(user);
+    // console.log(user);
     return (
-        <div style={user && { background: 'cadetblue', height: '50px' }}>
+        <>
             {
-                user &&
-                columns.map((col, index) => {
-                    return <span key={index + Math.random()}>
-                        {
-                            col.roles.some(role => user.roles.some(r => r === role)) && <button onClick={() =>
-                                navigate(col.url)
-                            }
-                                style={{ marginLeft: '10px', marginTop: '9px', height: '2rem' }}>
-                                {col.header}
-                            </button>
-                        }
-                    </span>
-                })
-            }
-            {
-                user && <button onClick={() => {
-                    signout();
-                    navigate('/')
-                }}
-                    style={{ float: 'right', marginRight: '10px', marginTop: '10px', height: '2rem'  }}>
-                    {user && user.name} logout
-                </button>
-            }
+                user && <div style={{ background: 'cadetblue', height: '50px' }}>
+                    <span style={{ color: 'whitesmoke', padding: '1rem' }}>LogoHere</span>
+                    {
+                        columns.map((col, index) => {
+                            return <span key={index + Math.random()}>
+                                {
+                                    col.roles.some(role => user.roles.some(r => r === role)) && <button onClick={() =>
+                                        navigate(col.url)
+                                    }
+                                        style={{ marginLeft: '10px', marginTop: '9px', height: '2rem' }}>
+                                        {col.header}
+                                    </button>
+                                }
+                            </span>
+                        })
+                    }
+                    <button onClick={() => {
+                        signout();
+                        navigate('/')
+                    }}
+                        style={{ float: 'right', marginRight: '10px', marginTop: '10px', height: '2rem' }}>
+                        {user.name} logout
+                    </button>
 
-        </div>
+                </div>
+            }
+        </>
     )
 }
 
