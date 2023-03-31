@@ -10,6 +10,7 @@ import Users from './Components/Dashboard/Users';
 import Footer from './Components/Footer';
 import Header from './Components/Header';
 import Signup from './Components/Login/Signup';
+import { getUser } from './Components/Services/LoginService';
 
 export const Store = createContext();
 
@@ -20,12 +21,15 @@ function App() {
     event.preventDefault();
     return;
   }
+
+  const user = getUser();
+
   return (
     <div className='App'>
       <Store.Provider value={{ jwtResponse, setJwtResponse }}>
         <BrowserRouter>
           {
-            jwtResponse && <Header jwtResponse={jwtResponse} setJwtResponse={setJwtResponse} />
+            user && user.token && <Header jwtResponse={jwtResponse} setJwtResponse={setJwtResponse} />
           }
           <Routes>
             <Route exact path="/" element={<Signin />} />

@@ -1,7 +1,13 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getUser, signout } from './Services/LoginService';
 
 const columns = [
+    {
+        "header": "Dashboard",
+        "url": "/dashboard",
+        "roles": ["ADMIN", "USER", "REVIEWER"]
+    },
     {
         "header": "Users",
         "url": "/users",
@@ -15,7 +21,7 @@ const columns = [
     {
         "header": "Test Set",
         "url": "/ts",
-        "roles": ["ADMIN", "USER", "REVIEWER"]
+        "roles": ["ADMIN"]
     },
     {
         "header": "Results",
@@ -26,25 +32,37 @@ const columns = [
 ]
 
 function Header({ jwtResponse, setJwtResponse }) {
-    const roles = jwtResponse && jwtResponse.roles;
-
+    const user = getUser();
     const navigate = useNavigate();
 
+
+    console.log(user);
     return (
-        <div style={jwtResponse && { background: 'cadetblue', height: '30px' }}>
+        <div style={user && { background: 'cadetblue', height: '50px' }}>
             {
-                jwtResponse &&
+                user &&
                 columns.map((col, index) => {
-                    return <button onClick={() => navigate(col.url)} key={index + Math.random()}
-                        style={{ marginLeft: '10px', marginTop: '3px' }}>
-                        {col.header}
-                    </button>
+                    return <span key={index + Math.random()}>
+                        {
+                            col.roles.some(role => user.roles.some(r => r === role)) && <button onClick={() =>
+                                navigate(col.url)
+                            }
+                                style={{ marginLeft: '10px', marginTop: '9px', height: '2rem' }}>
+                                {col.header}
+                            </button>
+                        }
+                    </span>
                 })
             }
-            <button onClick={() => { setJwtResponse(null); navigate('/') }}
-                style={{ float: 'right', marginRight: '10px', marginTop: '3px' }}>
-                {jwtResponse.name} logout
-            </button>
+            {
+                user && <button onClick={() => {
+                    signout();
+                    navigate('/')
+                }}
+                    style={{ float: 'right', marginRight: '10px', marginTop: '10px', height: '2rem'  }}>
+                    {user && user.name} logout
+                </button>
+            }
 
         </div>
     )

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Store } from '../../App';
 import { signin } from '../Services/LoginService';
@@ -18,8 +18,9 @@ function Signin() {
     e.preventDefault();
     signin({ username, password, email }).then(response => {
       console.log('login success', response);
-      if (response.status === 200) {
+      if (response.status === 200 && response.data.token) {
         setJwtResponse(response.data)
+        localStorage.setItem('user', JSON.stringify(response.data));
         navigate('/dashboard');
       } else {
         setLoginError(true);

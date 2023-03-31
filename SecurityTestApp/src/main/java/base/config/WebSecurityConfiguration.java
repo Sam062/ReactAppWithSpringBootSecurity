@@ -42,10 +42,11 @@ public class WebSecurityConfiguration {
 	SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 		// URL Access Types
 		httpSecurity.cors().and().csrf().disable().authorizeHttpRequests()
-				.requestMatchers("/test", "/signin" , "/signup").permitAll()
-				.requestMatchers("/admin").hasAnyAuthority("ADMIN")
+				.requestMatchers("/test", "/signin" , "/signup", "/public").permitAll()
+				.requestMatchers("/admin", "/ts").hasAnyAuthority("ADMIN")
 				.requestMatchers("/user").hasAnyAuthority("ADMIN", "USER")
 				.requestMatchers("/reviewer").hasAnyAuthority("ADMIN","REVIEWER")
+				.requestMatchers("/assessments", "/rs").hasAnyAuthority("ADMIN","USER", "REVIEWER")
 				.anyRequest().authenticated()
 //				 Exception details
 				.and()
